@@ -1,0 +1,61 @@
+import React from "react";
+import { useState } from "react";
+
+const messages = [
+  "Learn React ⚛️",
+  "Apply for jobs 💼",
+  "Invest your new income 🤑",
+];
+
+function Step({ stateStep, stepNum }) {
+  return (
+    <div className={stateStep === stepNum ? "active" : null}>{stepNum}</div>
+  );
+}
+
+function AllSteps({ step }) {
+  return (
+    <>
+      <Step stateStep={step} stepNum={1} />
+      <Step stateStep={step} stepNum={2} />
+      <Step stateStep={step} stepNum={3} />
+    </>
+  );
+}
+
+function App() {
+  const [step, setStep] = useState(1);
+
+  return (
+    <div className="steps">
+      <div className="numbers">
+        <AllSteps step={step} />
+      </div> Hello
+      <p className="message">
+        Step {step}: {messages[step - 1]}
+      </p>
+      <div className="buttons">
+        {step > 1 ? (
+          <button
+            onClick={() => setStep(step - 1)}
+            style={{ background: "#7950f2", color: "#fff" }}
+          >
+            {" "}
+            Previous
+          </button>
+        ) : null}
+
+        {step < 3 ? (
+          <button
+            onClick={() => setStep(step + 1)}
+            style={{ background: "#7950f2", color: "#fff" }}
+          >
+            Next
+          </button>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+export default App;
