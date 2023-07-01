@@ -17,7 +17,7 @@ export default function App() {
         item.id === id ? { ...item, packed: !item.packed } : item
       )
     );
-    console.log(itemsTwo)
+    console.log(itemsTwo);
   }
 
   return (
@@ -29,7 +29,7 @@ export default function App() {
         onDeleteItem={handleDeleteItem}
         onToggleItem={handleToggleItem}
       />
-      <Stats />
+      <Stats items={itemsTwo} />
     </div>
   );
 }
@@ -114,10 +114,17 @@ function Item({ item, onDeleteItem, onToggleItem }) {
   );
 }
 
-function Stats() {
+function Stats({ items }) {
+  const numItems = items.length;
+  const packed =
+    (items.filter((item) => item.packed === true).length / numItems) * 100;
   return (
     <footer className="stats">
-      <em> You have X items on your list, and you already packed X (X%)</em>
+      <em>
+        You have {numItems} items on your list, and you already packed{" "}
+        {items.filter((item) => item.packed === true).length} (
+        {packed ? packed : 0})%
+      </em>
     </footer>
   );
 }
